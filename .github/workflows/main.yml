@@ -21,7 +21,7 @@ jobs:
           java-version: '17'
 
       - name: Décompresser le projet
-        run: unzip -o JorfFertilizersApp_v6.zip
+        run: unzip -o JorfFertilizersApp_v7.zip
 
       - name: Corriger Java 1.8 vers Java 17
         run: |
