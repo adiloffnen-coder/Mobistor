@@ -20,9 +20,6 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Décompresser le projet
-        run: unzip -o MobiStock_v1.zip
-
       - name: Corriger Java 1.8 vers Java 17
         run: |
           sed -i '/android {/a\
@@ -42,5 +39,5 @@ jobs:
       - name: Récupérer l'APK
         uses: actions/upload-artifact@v4
         with:
-          name: MobiStor-APK
+          name: MobiStock-APK
           path: app/build/outputs/apk/debug/app-debug.apk
