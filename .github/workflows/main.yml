@@ -21,8 +21,7 @@ jobs:
           java-version: '17'
 
       - name: Décompresser le projet
-        run: |
-          unzip -o JorfFertilizersApp_v1.zip
+        run: unzip -o JorfFertilizersApp_v1.zip
 
       - name: Installer Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -31,10 +30,11 @@ jobs:
 
       - name: Construire l'APK
         run: |
+          cd JorfFertilizersApp_v1
           gradle :app:assembleDebug
 
       - name: Récupérer l'APK
         uses: actions/upload-artifact@v4
         with:
           name: MobiStor-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: JorfFertilizersApp_v1/app/build/outputs/apk/debug/app-debug.apk
