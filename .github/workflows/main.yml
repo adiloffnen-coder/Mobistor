@@ -29,12 +29,10 @@ jobs:
           gradle-version: '8.7'
 
       - name: Construire l'APK
-        run: |
-          cd JorfFertilizersApp_v1
-          gradle :app:assembleDebug
+        run: gradle :app:assembleDebug
 
       - name: Récupérer l'APK
         uses: actions/upload-artifact@v4
         with:
           name: MobiStor-APK
-          path: JorfFertilizersApp_v1/app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
