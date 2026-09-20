@@ -23,13 +23,24 @@ jobs:
       - name: Décompresser le projet
         run: unzip -o JorfFertilizersApp_v1.zip
 
+      - name: Créer la configuration Java 17
+        run: |
+          cat > java17.init.gradle <<'EOF'
+          allprojects {
+              tasks.withType(JavaCompile).configureEach {
+                  sourceCompatibility = "17"
+                  targetCompatibility = "17"
+              }
+          }
+          EOF
+
       - name: Installer Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
 
       - name: Construire l'APK
-        run: gradle :app:assembleDebug
+        run: gradle --init-script java17.init.gradle :app:assembleDebug
 
       - name: Récupérer l'APK
         uses: actions/upload-artifact@v4
