@@ -20,16 +20,20 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Décompresser le projet
+        run: unzip -o MobiStock_V1.zip
+
       - name: Installer Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
 
       - name: Construire l'APK
+        working-directory: MobiStock_V1
         run: gradle :app:assembleDebug
 
       - name: Récupérer l'APK
         uses: actions/upload-artifact@v4
         with:
           name: MobiStock-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: MobiStock_V1/app/build/outputs/apk/debug/app-debug.apk
