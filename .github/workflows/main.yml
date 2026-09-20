@@ -20,14 +20,6 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Corriger Java 1.8 vers Java 17
-        run: |
-          sed -i '/android {/a\
-              compileOptions {\
-                  sourceCompatibility = JavaVersion.VERSION_17\
-                  targetCompatibility = JavaVersion.VERSION_17\
-              }' app/build.gradle.kts
-
       - name: Installer Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
