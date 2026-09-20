@@ -23,16 +23,13 @@ jobs:
       - name: Décompresser le projet
         run: unzip -o JorfFertilizersApp_v1.zip
 
-      - name: Créer la configuration Java 17
+      - name: Corriger Java 1.8 vers Java 17
         run: |
-          cat > java17.init.gradle <<'EOF'
-          allprojects {
-              tasks.withType(JavaCompile).configureEach {
-                  sourceCompatibility = "17"
-                  targetCompatibility = "17"
-              }
-          }
-          EOF
+          sed -i '/android {/a\
+              compileOptions {\
+                  sourceCompatibility = JavaVersion.VERSION_17\
+                  targetCompatibility = JavaVersion.VERSION_17\
+              }' app/build.gradle.kts
 
       - name: Installer Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -40,7 +37,7 @@ jobs:
           gradle-version: '8.9'
 
       - name: Construire l'APK
-        run: gradle --init-script java17.init.gradle :app:assembleDebug
+        run: gradle :app:assembleDebug
 
       - name: Récupérer l'APK
         uses: actions/upload-artifact@v4
