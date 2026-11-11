@@ -1,13 +1,4 @@
-name: Build Android APK
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - 
-
-jobs:
-  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: MobiStock-APK
-          path: MobiStock_V1/app/build/outputs/apk/debug/app-debug.apk
+          path: MobiStock_V1/app/build/outputs/apk/debug/app-deb
